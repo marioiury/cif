@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<block name="block1">
+
+	<filter name="filter1">
+		<paramList>
+			<param name="param1"/>
+			<param name="param2"/>
+			<param name="param3"/>
+			<param name="param4"/>
+		</paramList>
+	</filter>
+	
+	<widget name="w1">
+	
+		<filter name="filter2">
+			<paramList>
+				<param name="param3"/>
+			</paramList>
+		</filter>
+		
+		<data>
+			<paramList>
+				<param name="param1"/>
+				<param name="param3"/>
+			</paramList>
+		</data>
+		
+	</widget>
+	
+	<block name="block2">
+	
+		<widget name="w2">
+			<data>
+				<paramList>
+					<param name="param1"/>
+					<param name="param4"/>
+				</paramList>
+			</data>
+		</widget>
+		
+		<block name="block3">
+		
+			<filter name="filter3">
+				<paramList>
+					<param name="param1"/>
+					<param name="param2"/>
+					<param name="param3"/>
+				</paramList>
+			</filter>
+			
+			<widget name="w3">
+				<data>
+					<paramList>
+						<param name="param2"/>
+						<param name="param3"/>
+					</paramList>
+				</data>
+			</widget>
+			
+			<widget name="w4">
+				<data>
+					<paramList>
+						<param name="param1"/>
+						<param name="param4"/>
+					</paramList>
+				</data>
+			</widget>
+			
+		</block>
+	</block>
+</block>
