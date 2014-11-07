@@ -3,9 +3,141 @@
 	<head>
 		<meta charset="utf-8">
 		<script type="text/javascript" src="/cif/lib/cif2.js"></script>
+		<style type="text/css">
+			html, body {margin: 0;padding: 0;height: 100%;}
+			.value {text-align: center;}
+			.filter div:first-child {background: rgb(164, 157, 226);border: 1px solid rgb(113, 113, 116);text-align: center;}
+			.param {font-weight: bold;}
+			.value {cursor: pointer;}
+			.value.selected {background: white;}
+			.value.unselected {background: inherit;}
+		</style>
 	</head>
 	<body>
-		<div id="main"></div>
+		
+		<script type="text/javascript">
+
+			function sf( d ){
+				var filter = d.getAttribute( 'data-filter' ).split(';');
+				
+				var filterName = filter[0];
+				var filterParam = filter[1];
+				var filterValue = Number( filter[2] );
+				
+				var isChecked = ( d.getAttribute( 'data-selected' ) === "true" );
+				
+				if ( !isChecked ){
+					var r = test_block.setFilter( filterName, filterParam, filterValue );
+					d.setAttribute( "data-selected", "true" );
+					d.className = "value selected";
+				}
+				else{
+					var r = test_block.unsetFilter( filterName, filterParam, filterValue );
+					d.setAttribute( "data-selected", "false" );
+					d.className = "value unselected";
+				}
+
+				for ( var wId in r ){
+					document.getElementById( wId ).textContent = JSON.stringify( r[ wId ] );
+				}
+
+			}
+		</script>
+		
+		<div class="filter" style="position: absolute;
+								   height: 100%;
+								   width: 100px;
+								   background: red;">
+			<div>Фильтр</div>
+			<div class="param">Param 1</div>
+			
+				<div class="value" data-selected="false" data-filter="filter1;param1;5" onclick="sf(this);">5</div>
+				<div class="value" data-selected="false" data-filter="filter1;param1;6" onclick="sf(this);">6</div>
+			
+			<div class="param">Param 2</div>
+			
+				<div class="value" data-selected="false" data-filter="filter1;param2;2" onclick="sf(this);">2</div>
+				<div class="value" data-selected="false" data-filter="filter1;param2;0" onclick="sf(this);">0</div>
+			
+			<div class="param">Param 3</div>
+			
+				<div class="value" data-selected="false" data-filter="filter1;param3;4" onclick="sf(this);">4</div>
+				<div class="value" data-selected="false" data-filter="filter1;param3;5" onclick="sf(this);">5</div>
+			
+			<div class="param">Param 4</div>
+			
+				<div class="value" data-selected="false" data-filter="filter1;param4;10" onclick="sf(this);">10</div>
+		</div>
+		
+		<div class="block" style="position: relative;
+								  height: 100%;
+								  margin-left: 100px;">
+			<div style="position: relative;
+						width: 100%;
+						height: 50%;">
+				<div class="filter" style="position: absolute;
+										   height: 100%;
+										   width: 100px;
+										   background: green;">
+					<div>Фильтр</div>
+					<div class="param">Param 3</div>
+					
+						<div class="value" data-selected="false" data-filter="filter2;param3;7" onclick="sf(this);">7</div>
+				</div>
+				<div id="w1" class="widget" style="position: relative;
+												   height: 100%;
+												   margin-left: 100px;
+												   background: rgb(122,122,207);">
+				</div>
+			</div>
+			<div style="position: relative;
+						width: 100%;
+						height: 50%;">
+				<div id="w2" class="widget" style="position: relative;
+													height: 100%;
+													width: 50%;
+													float: left;
+													background: yellow;">
+				</div>
+				<div style="position: relative;
+							height: 100%;
+							width: 50%;
+							float: left;">
+					<div class="filter" style="position: absolute;
+											   height: 100%;
+											   width: 100px;
+											   background: red;">
+						<div>Фильтр</div>
+						<div class="param">Param 1</div>
+						
+							<div class="value" data-selected="false" data-filter="filter3;param1;11" onclick="sf(this);">11</div>
+						
+						<div class="param">Param 2</div>
+						
+							<div class="value" data-selected="false" data-filter="filter3;param2;1" onclick="sf(this);">1</div>
+						
+						<div class="param">Param 3</div>
+						
+							<div class="value" data-selected="false" data-filter="filter3;param3;100" onclick="sf(this);">100</div>
+					</div>
+					<div class="block" style="position: relative;
+											  height: 100%;
+											  margin-left: 100px;">
+						<div id="w3" class="widget" style="position: relative;
+												   width: 100%;
+												   height: 50%;
+												   background: green;">
+						</div>
+						<div id="w4" class="widget" style="position: relative;
+												   width: 100%;
+												   height: 50%;
+												   background: rgb(122,122,207);">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<script type="text/javascript">
 			var test_block = new Cif( "/cif/blocks/block1.xml" );
 		</script>
